@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
+        <link rel="stylesheet" href="assets/styles/style.css">
+        <script src="config.js"></script>
+        <script src="assets/scripts/jquery.js"></script>
+        <script src="assets/scripts/particles.js"></script>
+        <script src="assets/scripts/dadjokes.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+        <title>loading</title>
+    </head>
+
+    <body>
+        <div id="volumePanel">
+            <i class="fas fa-volume-down" style="margin-right: 5px;"></i>
+            <input type="range" min="1" max="100" id="volumeSlider" value="25">
+            <i class="fas fa-volume-up" style="margin-left: 5px;"></i>
+        </div>
+        <div class="info">
+            <ul class="leader">
+                <li>
+                    <i class="fa-solid fa-crown"></i>
+                    <div class="krecha"></div>
+                    <div class="ranga">EVIL3K</div>
+                    <img src="https://cdn.discordapp.com/avatars/712241813368340591/a_2235942f4aa4429739e7f292ed50f003.gif?size=1024" class="avatar">
+                </li>
+                <li>
+                    <i class="fa-solid fa-crown"></i>
+                    <div class="krecha"></div>
+                    <div class="ranga">YOKIM97</div>
+                    <img src="https://cdn.discordapp.com/avatars/359364395328995330/a_634218718a0854e8a0b0500f6b1f5e86.gif?size=1024" class="avatar">
+                </li>
+                <li>
+                    <i class="fa-solid fa-crown"></i>
+                    <div class="krecha"></div>
+                    <div class="ranga">DEWELO</div>
+                    <img src="https://cdn.discordapp.com/avatars/878017158809018368/11a696fe40ed5b274880f5c45b9ba7e2.png?size=1024" class="avatar">
+                </li>
+            </ul>
+        </div>
+        <img id="logo" src="assets/images/blockggnowe.png">
+
+        <div id="particles-js"></div>
+        
+        <script>
+            let videoId = localStorage.getItem("loadscreen-video") || Config.videoId;
+            let scriptElement
+            let player;
+
+            const volumeSlider = $("#volumeSlider");
+
+            function startVideo() {
+                player = null
+                const video = $("#video")
+                if (video.length) {
+                    video.remove()
+                }
+                const elem = $(`<div id="video"></div>`)
+                $("body").append(elem)
+
+                scriptElement = $("<script>");
+                scriptElement.attr("src", "https://www.youtube.com/iframe_api");
+                $("script:first").before(scriptElement);
+                onYouTubeIframeAPIReady("restart")
+            }
+
+            function videoChange() {
+                const rawVidID = $("#videoInput").val();
+                const newVidID = rawVidID.match(/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+                const endVideoID = newVidID ? newVidID[1] : null;
+
+                if (!endVideoID) return
+
+                videoId = endVideoID
+                localStorage.setItem("loadscreen-video", endVideoID)
+
+                startVideo()
+            }
+
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player("video", {
+                    videoId: videoId,
+                    playerVars: {
+                        "playlist": videoId,
+                        "autoplay": 1,
+                        "controls": 0,
+                        "disablekb": 1,
+                        "enablejsapi": 1,
+                        "loop": 1,
+                        "vq": "highres"
+                    },
+                    events: {
+                        "onReady": onStart
+                    }
+                });
+
+                fadeElements();
+            }
+
+            function onStart(event) {
+                const defaultVolume = localStorage.getItem(`volumeSlider-${videoId}`) || 25;
+                event.target.setVolume(defaultVolume);
+                event.target.setPlaybackQuality("highres");
+                event.target.playVideo();
+                volumeSlider.val(defaultVolume);
+                onVolume();
+                volumeSlider.on("input", onVolume);
+            }
+
+            function onVolume() {
+                const value = volumeSlider.val();
+                volumeSlider.css("background", `linear-gradient(90deg, ${Config.mainColor} ${value}%, #5f5f5f ${value}%)`);
+                player.setVolume(value - 1);
+                localStorage.setItem(`volumeSlider-${videoId}`, value);
+            }
+
+            function fadeElements() {
+                if (Config.particlesEnabled) {
+                    particlesJS('particles-js', Config.particlesOptions);
+                }
+                if (Config.dadJokesEnabled) {
+                    $("#dadJokePanel").css("bottom", "4%");
+                    $("#dadJoke").html(`<b>Dad joke</b><br>${DadJoke()}`);
+                }
+                $("#videoInputPanel").css("right", "1.5%");
+                $("#logo").css("bottom", "35%");
+                $("#serverPanel").css("bottom", "4%");
+                $("#discordInvite").html(Config.serverCredits);
+            }
+
+            startVideo();
+        </script>
+    </body>
+</html>

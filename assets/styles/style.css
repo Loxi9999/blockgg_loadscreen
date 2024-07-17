@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+head,
+body {
+	background-color: #000;
+	overflow: hidden;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#video {
+	left: 0;
+	top: 0;
+	z-index: -3;
+	position: absolute;
+	border: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#particles-js {
+	z-index: -1;
+	opacity: 0.7;
+}
+
+#volumePanel,
+#dadJokePanel,
+#serverPanel,
+#videoInputPanel {
+	transition: left 1s, bottom 1s;
+	position: absolute;
+	z-index: 1;
+	background: #181818;
+	border-radius: 10px;
+}
+
+#videoInputSubmit:hover {
+	color: #fff;
+}
+#videoInput,
+#videoInputSubmit {
+	padding: 2px 5px;
+	background: rgba(95, 95, 95, 0.1);
+	font-weight: 700;
+	color: #7a7a7a;
+}
+
+#videoInputPanel i {
+	margin-right: 8px;
+}
+
+#videoInputPanel {
+	transition: right 1s;
+	top: 3%;
+	right: -20%;
+	padding-bottom: 8px;
+}
+
+#videoInput,
+#videoInputText {
+	font-family: Poppins;
+	margin: 2px 8px;
+	border: 0;
+	font-size: 12px;
+	outline: 0;
+}
+
+#videoInputText {
+	color: #b3b3b3;
+	margin-top: 7px;
+	margin-left: 8px;
+	font-weight: 700;
+}
+
+#videoInputSubmit {
+	height: 22px;
+	border: 0;
+	outline: 0;
+	margin-right: 10px;
+	border-radius: 5px;
+}
+
+#videoInput {
+	border-radius: 5px;
+}
+
+#videoInput::placeholder {
+	color: #5a5a5a;
+}
+/*jebie chujem ten blockgg XDD*/
+#volumePanel {
+	position: absolute;
+	padding: 7px 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 2%;
+	display: flex;
+	align-items: center;
+}
+
+#serverPanel {
+	padding: 5px 15px;
+	right: 6%;
+}
+
+#dadJokePanel {
+	padding: 5px 15px;
+	bottom: -10%;
+	right: 0.7%;
+}
+
+#dadJoke,
+#discordInvite,
+#videoInputText {
+	font-family: Poppins;
+	font-size: 12px;
+	font-weight: 300;
+	color: white;
+}
+
+#volumeSlider {
+	-webkit-appearance: none;
+	height: 5px;
+	outline: 0;
+	border: 0;
+	width: 133px;
+	overflow: visible;
+	border-radius: 20px;
+}
+
+::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 15px;
+	border-radius: 15px;
+	height: 15px;
+	background: #fff;
+}
+
+i {
+	font-size: 12px;
+	color: #b3b3b3;
+	padding: 0 5 0 5;
+}
+/*loxi tu byl okok*/
+#logo {
+	z-index: -2;
+	position: absolute;
+	left: 42.5%;
+	width: 30vh;
+	height: 30vh;
+	transition: bottom 1s;
+	animation: beat 1s infinite alternate;
+}
+
+@keyframes beat {
+	to {
+		transform: scale(0.8);
+	}
+}
+
+.cweloz {
+	position: absolute;
+	border-radius: 10px 0px 0px 10px;
+	top: 26.5%;
+	width: 1.30vh;
+	height: 40vh;
+	left: 0.5%;
+	border-top: 7px solid rgba(29, 29, 29, 0.788);
+	border-bottom: 7px solid rgba(29, 29, 29, 0.788);
+	border-left: 7px solid rgba(29, 29, 29, 0.788);
+}
+
+.cweloz2 {
+	position: absolute;
+	top: -4%;
+	width: 1.25vh;
+	height: 50vh;
+	left: 0.9%;
+	border-bottom: 7px solid rgba(29, 29, 29, 0.788);
+}
+
+.info {
+	position: absolute;
+	border-radius: 10px;
+	left: 36.5%;
+	transform: translateX(-50%);
+	bottom: -47%;
+	width: 20vh;
+	height: 60vh;
+}
+
+.info ul {
+	display: flex;
+	position: relative;
+	top: -10%;
+	left: 5%;
+	list-style-type: none;
+}
+
+
+.info ul li {
+	position: relative;
+	text-align: center;
+	color: white;
+	font-weight: 600;
+	font-family: poppins;
+	padding: 10px;
+	background-color: rgba(29, 29, 29, 0.788);
+	border-radius: 10px;
+	margin-left: 50px;
+	min-height: 150px;
+	max-height: 100px;
+}
+
+.info ul li .ranga {
+	position: relative;
+	top: 10px;
+	font-size: 20px;
+}
+
+.info ul li .avatar {
+	width: 80px;
+	border-radius: 50px;
+	margin-top: 15px;
+}
+
+.info ul li i {
+	font-size: 25px;
+	color: yellow;
+}
+
+.info ul li .krecha {
+	top: 7px;
+	left: 0%;
+	position: relative;
+	width: 15vh;
+	height: 2px;
+	background-color: crimson;
+}
